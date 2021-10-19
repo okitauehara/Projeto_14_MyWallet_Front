@@ -1,5 +1,10 @@
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Login from './components/pages/Login';
+import SignUp from './components/pages/SignUp';
+import Home from './components/pages/Home';
+import Earnings from './components/pages/Earnings';
+import Expenses from './components/pages/Expenses';
 
 export default function App() {
 	return (
@@ -9,7 +14,7 @@ export default function App() {
 					<Login />
 				</Route>
 				<Route path='/signup' exact>
-					<Register />
+					<SignUp />
 				</Route>
 				<Route path='/home' exact>
 					<Home />
