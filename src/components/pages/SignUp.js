@@ -1,7 +1,8 @@
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 import Redirect from "../shared/Redirect";
-import { CenterPage, Logo, Form } from "../shared/LoginSignUp";
+import Form from "../shared/Form";
+import { CenterPage, Logo } from "../shared/LoginSignUp";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 

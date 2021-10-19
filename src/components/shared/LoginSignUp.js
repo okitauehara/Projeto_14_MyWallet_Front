@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const CenterPage = styled.section`
-    height: 100vh;
+    height: calc(100vh - 50px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,16 +15,7 @@ const Logo = styled.h1`
     margin-bottom: 25px;
 `;
 
-const Form = styled.form`
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;
-
 export {
     CenterPage,
-    Logo,
-    Form
+    Logo
 }
