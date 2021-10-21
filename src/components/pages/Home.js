@@ -57,7 +57,7 @@ export default function Home() {
     return (
         <HomeContent>
             <PageTitle>Olá, Fulano</PageTitle>
-            <Link to='/'>
+            <Link to='/sign-in'>
                 <LogoutIcon></LogoutIcon>
             </Link>
                 <Transactions items={items} balance={balance}/>

@@ -61,7 +61,7 @@ export default function SignUp() {
                 />
                 <Button>Cadastrar</Button>
             </Form>
-            <Link to='/'>
+            <Link to='/sign-in'>
                 <Redirect>Já tem uma conta? Entre agora!</Redirect>
             </Link>
         </CenterPage>

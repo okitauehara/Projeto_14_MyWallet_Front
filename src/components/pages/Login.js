@@ -45,7 +45,7 @@ export default function Login() {
                 />
                 <Button>Entrar</Button>
             </Form>
-            <Link to='/signup'>
+            <Link to='/sign-up'>
                 <Redirect>Primeira vez? Cadastre-se!</Redirect>
             </Link>
         </CenterPage>
