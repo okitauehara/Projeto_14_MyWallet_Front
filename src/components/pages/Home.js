@@ -41,18 +41,8 @@ export default function Home() {
             description: "Salário",
             value: 300000,
             type: "earning"
-        }
+        },
     ];
-
-    let balance = 0;
-
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].type === 'earning') {
-            balance += items[i].value;
-        } else {
-            balance -= items[i].value;
-        }
-    }
 
     return (
         <HomeContent>
@@ -60,7 +50,7 @@ export default function Home() {
             <Link to='/sign-in'>
                 <LogoutIcon></LogoutIcon>
             </Link>
-                <Transactions items={items} balance={balance}/>
+                <Transactions items={items}/>
                 <Buttons>
                     <Link to='/earnings'>
                         <AddButton>
@@ -79,11 +69,9 @@ export default function Home() {
     );
 }
 
-function Transactions({ items, balance }) {
-
+function Transactions({ items }) {
     return (
         <ContainerList quantity={items.length}>
-            <Items>
             {items.length > 0 ? 
             items.map(item => {
             return (
@@ -91,14 +79,8 @@ function Transactions({ items, balance }) {
                 <DateAndDescription><span>{item.date}</span>{item.description}</DateAndDescription>
                 <Value type={item.type}>{(item.value / 100).toFixed(2).replace('.', ',')}</Value>
             </Item>
-            )})
-            :
+            )}) :
             <NoItems>Não há registros de entrada ou saída</NoItems>}
-            </Items>
-            {items.length > 0 ?
-            <Balance positive={balance}>SALDO <span>{(balance / 100).toFixed(2).replace('.', ',')}</span></Balance>
-            :
-            ''}
         </ContainerList>
     );
 }
@@ -126,14 +108,13 @@ const ContainerList = styled.div`
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: ${props => props.quantity > 0 ? 'space-between' : 'center'};
+    justify-content: ${props => props.quantity > 0 ? 'normal' : 'center'};
 `;
 
 const NoItems = styled.p`
     font-size: 20px;
     color: #868686;
     text-align: center;
-    overflow-y: hidden;
 `;
 
 const Buttons = styled.div`
@@ -176,11 +157,6 @@ const MinusIcon = styled(FiMinusCircle)`
     left: 10px;
 `;
 
-const Items = styled.div`
-    max-height: 380px;
-    overflow-y: scroll;
-`;
-
 const Item = styled.div`
     display: flex;
     justify-content: space-between;
@@ -206,17 +182,4 @@ const Value = styled.p`
     line-height: 31px;
     word-break: break-word;
     color: ${props => props.type === 'earning' ? '#03ac00' : '#c70000'};
-`;
-
-const Balance = styled.p`
-    color: #000000;
-    font-weight: 700;
-    font-size: 17px;
-    display: flex;
-    justify-content: space-between;
-
-    & span {
-        font-weight: 400;
-        color: ${props => props.positive > 0 ? '#03ac00' : '#c70000'};
-    }
 `;
