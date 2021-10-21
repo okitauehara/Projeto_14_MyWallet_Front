@@ -10,11 +10,16 @@ const Input = styled.input`
     outline: none;
     padding-left: 15px;
     margin-bottom: 13px;
+    pointer-events: ${props => props.disabled ? 'none' : 'all'};
 
     &::placeholder {
         font-family: 'Raleway', sans-serif;
         font-size: 20px;
         color: #000000;
+    }
+
+    &:valid {
+        background-color: #d4f8d4;
     }
 `;
 
