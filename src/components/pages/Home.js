@@ -57,18 +57,18 @@ export default function Home() {
     return (
         <HomeContent>
             <PageTitle>Olá, Fulano</PageTitle>
-            <Link to='/sign-in'>
+            <Link to='/'>
                 <LogoutIcon></LogoutIcon>
             </Link>
                 <Transactions items={items} balance={balance}/>
                 <Buttons>
-                    <Link to='/earnings'>
+                    <Link to='/new-earning'>
                         <AddButton>
                             <PlusIcon></PlusIcon>
                             Nova Entrada
                         </AddButton>
                     </Link>
-                    <Link to='/expenses'>
+                    <Link to='/new-expense'>
                         <AddButton>
                             <MinusIcon></MinusIcon>
                             Nova Saída

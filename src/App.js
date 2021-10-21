@@ -10,7 +10,7 @@ export default function App() {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route path='/sign-in' exact>
+				<Route path='/' exact>
 					<Login />
 				</Route>
 				<Route path='/sign-up' exact>
@@ -19,10 +19,10 @@ export default function App() {
 				<Route path='/home' exact>
 					<Home />
 				</Route>
-				<Route path='/earnings' exact>
+				<Route path='/new-earning' exact>
 					<Earnings />
 				</Route>
-				<Route path='/expenses' exact>
+				<Route path='/new-expense' exact>
 					<Expenses />
 				</Route>
 			</Switch>
