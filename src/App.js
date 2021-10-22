@@ -24,7 +24,7 @@ export default function App() {
 						<SignUp />
 					</Route>
 					<Route path='/home' exact>
-						<Home />
+						<Home setUser={setUser}/>
 					</Route>
 					<Route path='/new-earning' exact>
 						<Earnings />

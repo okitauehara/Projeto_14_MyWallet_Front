@@ -2,13 +2,15 @@ import styled from "styled-components";
 import PageTitle from "../shared/PageTitle";
 import { RiLogoutBoxRLine } from 'react-icons/ri'
 import { FiPlusCircle, FiMinusCircle } from 'react-icons/fi';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
+import { requestSignOut } from "../../services/API";
 
-export default function Home() {
+export default function Home({ setUser }) {
 
     const { user } = useContext(UserContext);
+    const history = useHistory();
 
     const items = [
         {
@@ -58,11 +60,21 @@ export default function Home() {
         }
     }
 
+    function signOutUser() {
+        requestSignOut(user.token)
+            .then(() => {
+                localStorage.removeItem('@user');
+                setUser({})
+                history.push('/');
+            })
+            .catch((error) => console.log(error));
+    }
+
     return (
         <HomeContent>
             <PageTitle>Olá, {user.name}</PageTitle>
             <Link to='/'>
-                <LogoutIcon></LogoutIcon>
+                <LogoutIcon onClick={signOutUser}></LogoutIcon>
             </Link>
                 <Transactions items={items} balance={balance}/>
                 <Buttons>

@@ -19,7 +19,7 @@ export default function Login({ setUser }) {
 
     const history = useHistory();
 
-    if (user) {
+    if (user?.token) {
         history.push('/home');
     }
 

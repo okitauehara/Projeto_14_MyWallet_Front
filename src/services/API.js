@@ -1,6 +1,15 @@
 import axios from 'axios';
 const URL_BASE = 'http://localhost:4000';
 
+function createHeaders(token) {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    return config;
+}
+
 function postSignUp(body) {
     const promise = axios.post(`${URL_BASE}/sign-up`, body);
     return promise;
@@ -11,7 +20,14 @@ function postSignIn(body) {
     return promise;
 }
 
+function requestSignOut(token) {
+    const config = createHeaders(token);
+    const promise = axios.delete(`${URL_BASE}/sign-out`, config);
+    return promise;
+}
+
 export {
     postSignUp,
-    postSignIn
+    postSignIn,
+    requestSignOut
 }
