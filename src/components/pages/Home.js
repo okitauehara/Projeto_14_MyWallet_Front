@@ -3,8 +3,12 @@ import PageTitle from "../shared/PageTitle";
 import { RiLogoutBoxRLine } from 'react-icons/ri'
 import { FiPlusCircle, FiMinusCircle } from 'react-icons/fi';
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
 
 export default function Home() {
+
+    const { user } = useContext(UserContext);
 
     const items = [
         {
@@ -56,7 +60,7 @@ export default function Home() {
 
     return (
         <HomeContent>
-            <PageTitle>Olá, Fulano</PageTitle>
+            <PageTitle>Olá, {user.name}</PageTitle>
             <Link to='/'>
                 <LogoutIcon></LogoutIcon>
             </Link>

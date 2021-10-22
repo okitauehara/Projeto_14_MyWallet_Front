@@ -19,7 +19,7 @@ const Input = styled.input`
     }
 
     &:valid {
-        background-color: #d4f8d4;
+        background-color: ${props => props.validation ? '#d4f8d4' : 'default'};
     }
 `;
 

@@ -10,6 +10,10 @@ const Button = styled.button`
     border: none;
     border-radius: 5px;
     background-color: #a328d6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: ${props => props.disabled ? 'none' : 'all'};
 `;
 
 export default Button;

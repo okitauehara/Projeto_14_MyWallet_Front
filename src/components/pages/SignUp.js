@@ -73,6 +73,7 @@ export default function SignUp() {
                     value={data.name}
                     onChange={handleChange}
                     disabled={isDisabled}
+                    validation={true}
                 />
                 <Input
                     placeholder='E-mail'
@@ -83,6 +84,7 @@ export default function SignUp() {
                     value={data.email}
                     onChange={handleChange}
                     disabled={isDisabled}
+                    validation={true}
                 />
                 <Input
                     placeholder='Senha'
@@ -93,6 +95,7 @@ export default function SignUp() {
                     value={data.password}
                     onChange={handleChange}
                     disabled={isDisabled}
+                    validation={true}
                 />
                 <Input
                     placeholder='Confirme a senha'
@@ -104,10 +107,11 @@ export default function SignUp() {
                     value={data.confirmation}
                     onChange={handleChange}
                     disabled={isDisabled}
+                    validation={true}
                 />
                 <Button disabled={isDisabled}>Cadastrar</Button>
             </Form>
-            <Link to='/'>
+            <Link to='/' disabled={isDisabled} style={{pointerEvents: isDisabled ? 'none' : 'all'}}>
                 <Redirect>Já tem uma conta? Entre agora!</Redirect>
             </Link>
         </CenterPage>
