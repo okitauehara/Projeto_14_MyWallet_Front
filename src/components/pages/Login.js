@@ -14,7 +14,6 @@ export default function Login({ setUser }) {
 
     const [data, setData] = useState({ email: '', password: '' });
     const [isDisabled, setIsDisabled] = useState(false);
-    const [loading, setLoading] = useState(false);
     const { user } = useContext(UserContext);
 
     const history = useHistory();
@@ -34,7 +33,6 @@ export default function Login({ setUser }) {
     function submitLogin(event) {
         event.preventDefault();
         setIsDisabled(true);
-        setLoading(true);
         const body = {
             email: data.email,
             password: data.password
@@ -45,7 +43,6 @@ export default function Login({ setUser }) {
                 setUser(response.data);
                 localStorage.setItem('@user',JSON.stringify(response.data));
                 setIsDisabled(false);
-                setLoading(false);
                 history.push('/home')
             })
             .catch(() => {
@@ -54,7 +51,6 @@ export default function Login({ setUser }) {
                     title: 'E-mail ou senha incorretos',
                 });
                 setIsDisabled(false);
-                setLoading(false);
             })
     }
 
@@ -80,7 +76,7 @@ export default function Login({ setUser }) {
                     onChange={handleChange}
                     disabled={isDisabled}
                 />
-                <Button disabled={isDisabled}>{loading ? <Loader type="ThreeDots" color="#ffffff" height={60} width={60} /> : 'Entrar'}</Button>
+                <Button disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#ffffff" height={60} width={60} /> : 'Entrar'}</Button>
             </Form>
             <Link to='/sign-up' disabled={isDisabled} style={{pointerEvents: isDisabled ? 'none' : 'all'}}>
                 <Redirect>Primeira vez? Cadastre-se!</Redirect>

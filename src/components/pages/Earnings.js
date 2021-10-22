@@ -1,12 +1,20 @@
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 import Form from "../shared/Form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PageTitle from "../shared/PageTitle";
+import { postNewEarning } from "../../services/API";
+import UserContext from "../../contexts/UserContext";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router";
+import Loader from "react-loader-spinner";
 
 export default function Earnings() {
 
+    const { user } = useContext(UserContext);
     const [data, setData] = useState({ value: '', description: '' });
+    const [isDisabled, setIsDisabled] = useState(false);
+    const history = useHistory();
 
     const handleChange = event => {
         const { name, value } = event.target;
@@ -18,7 +26,28 @@ export default function Earnings() {
 
     function submitEarnings(event) {
         event.preventDefault();
-        // Conectar com back-end
+        setIsDisabled(true);
+        const body = {
+            description: data.description,
+            value: Number((data.value).replace(',', '')),
+            type: 'earning'
+        }
+        postNewEarning(body, user.token)
+            .then(() => {
+                setIsDisabled(false);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Adicionado com sucesso!',
+                })
+                history.push('/home')
+            })
+            .catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Verifique se os dados inseridos estão corretos e tente novamente',
+                })
+                setIsDisabled(false);
+            });
     }
 
     return (
@@ -26,12 +55,14 @@ export default function Earnings() {
             <PageTitle>Nova Entrada</PageTitle>
             <Form onSubmit={submitEarnings}>
                 <Input
-                    placeholder='Valor'
+                    placeholder='Valor (Ex: 30,00)'
                     type='text'
                     name='value'
                     required
                     value={data.value}
                     onChange={handleChange}
+                    pattern="^[1-9]\d{0,2}(\d{3})*,\d{2}$"
+                    disabled={isDisabled}
                 />
                 <Input
                     placeholder='Descrição'
@@ -40,8 +71,9 @@ export default function Earnings() {
                     required
                     value={data.description}
                     onChange={handleChange}
+                    disabled={isDisabled}
                 />
-                <Button>Salvar entrada</Button>
+                <Button disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#ffffff" height={60} width={60} /> : 'Salvar entrada'}</Button>
             </Form>
         </>
     );

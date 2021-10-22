@@ -17,7 +17,8 @@ export default function Home({ setUser }) {
         getTransactions(user.token)
             .then((response) => setItems(response.data))
             .catch((error) => console.log(error));
-    }, [user.token]);
+        // eslint-disable-next-line
+    }, []);
 
     let balance = 0;
 
