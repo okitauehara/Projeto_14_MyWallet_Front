@@ -14,7 +14,7 @@ export default function App() {
 	const [user, setUser] = useState(userData);
 
 	return (
-		<UserContext.Provider value={{ user }}>
+		<UserContext.Provider value={{ user, userData }}>
 			<BrowserRouter>
 				<Switch>
 					<Route path='/' exact>

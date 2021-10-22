@@ -11,10 +11,18 @@ import Loader from "react-loader-spinner";
 
 export default function Earnings() {
 
-    const { user } = useContext(UserContext);
+    const { user, userData } = useContext(UserContext);
     const [data, setData] = useState({ value: '', description: '' });
     const [isDisabled, setIsDisabled] = useState(false);
     const history = useHistory();
+
+    if (userData === null) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Você precisa estar logado para acessar esta página!',
+        })
+        history.push('/')
+    }
 
     const handleChange = event => {
         const { name, value } = event.target;

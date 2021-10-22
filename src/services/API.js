@@ -38,10 +38,17 @@ function postNewEarning(body, token) {
     return promise;
 }
 
+function postNewExpense(body, token) {
+    const config = createHeaders(token);
+    const promise = axios.post(`${URL_BASE}/transactions`, body, config);
+    return promise;
+}
+
 export {
     postSignUp,
     postSignIn,
     requestSignOut,
     getTransactions,
-    postNewEarning
+    postNewEarning,
+    postNewExpense
 }
