@@ -26,8 +26,15 @@ function requestSignOut(token) {
     return promise;
 }
 
+function getTransactions(token) {
+    const config = createHeaders(token);
+    const promise = axios.get(`${URL_BASE}/transactions`, config);
+    return promise;
+}
+
 export {
     postSignUp,
     postSignIn,
-    requestSignOut
+    requestSignOut,
+    getTransactions
 }

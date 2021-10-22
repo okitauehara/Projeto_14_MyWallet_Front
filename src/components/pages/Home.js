@@ -3,52 +3,21 @@ import PageTitle from "../shared/PageTitle";
 import { RiLogoutBoxRLine } from 'react-icons/ri'
 import { FiPlusCircle, FiMinusCircle } from 'react-icons/fi';
 import { Link, useHistory } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
-import { requestSignOut } from "../../services/API";
+import { getTransactions, requestSignOut } from "../../services/API";
 
 export default function Home({ setUser }) {
 
+    const [items, setItems] = useState([]);
     const { user } = useContext(UserContext);
     const history = useHistory();
 
-    const items = [
-        {
-            id: 1,
-            date: "30/11",
-            description: "Almoço mãe",
-            value: 3990,
-            type: "expense"
-        },
-        {
-            id: 2,
-            date: "27/11",
-            description: "Mercado",
-            value: 54254,
-            type: "expense"
-        },
-        {
-            id: 3,
-            date: "26/11",
-            description: "Compras churrasco",
-            value: 6760,
-            type: "expense"
-        },
-        {
-            id: 4,
-            date: "20/11",
-            description: "Empréstimo Maria",
-            value: 50000,
-            type: "earning"
-        },
-        {
-            id: 5,
-            date: "15/11",
-            description: "Salário",
-            value: 300000,
-            type: "earning"
-        },
-    ];
+    useEffect(() => {
+        getTransactions(user.token)
+            .then((response) => setItems(response.data))
+            .catch((error) => console.log(error));
+    }, [user.token]);
 
     let balance = 0;
 
