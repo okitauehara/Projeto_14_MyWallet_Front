@@ -72,6 +72,7 @@ export default function Expenses() {
                     type='text'
                     name='value'
                     required
+                    autoFocus
                     value={data.value}
                     onChange={handleChange}
                     pattern="^[1-9]\d{0,2}(\d{3})*,\d{2}$"

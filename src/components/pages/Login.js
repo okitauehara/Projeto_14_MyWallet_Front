@@ -63,6 +63,7 @@ export default function Login({ setUser }) {
                     type='email'
                     name='email'
                     required
+                    autoFocus
                     value={data.email}
                     onChange={handleChange}
                     disabled={isDisabled}

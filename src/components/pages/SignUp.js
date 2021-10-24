@@ -69,6 +69,7 @@ export default function SignUp() {
                     type='text'
                     name='name'
                     required
+                    autoFocus
                     minLength='3'
                     value={data.name}
                     onChange={handleChange}
