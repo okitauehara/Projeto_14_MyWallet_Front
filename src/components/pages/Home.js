@@ -136,8 +136,13 @@ const ContainerList = styled.div`
 `;
 
 const Items = styled.div`
-    max-height: 380px;
+    max-height: 92.5%;
+    border-radius: 5px;
     overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+    width: 0px;
+    }
 `;
 
 const NoItems = styled.p`
@@ -206,9 +211,9 @@ const Item = styled.div`
 
 const DateAndDescription = styled.p`
     font-size: 16px;
-    max-width: 220px;
+    max-width: 75%;
     color: #000000;
-    line-height: 31px;
+    line-height: 30px;
     word-break: break-word;
 
     & span {
@@ -220,8 +225,8 @@ const DateAndDescription = styled.p`
 
 const Value = styled.p`
     font-size: 16px;
-    max-width: 72px;
-    line-height: 31px;
+    max-width: 25%;
+    line-height: 30px;
     word-break: break-word;
     color: ${props => props.type === 'earning' ? '#03ac00' : '#c70000'};
 `;
