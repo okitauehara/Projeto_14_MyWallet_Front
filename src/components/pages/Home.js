@@ -136,7 +136,7 @@ const ContainerList = styled.div`
 `;
 
 const Items = styled.div`
-    max-height: 92.5%;
+    max-height: 377px;
     border-radius: 5px;
     overflow-y: scroll;
 
