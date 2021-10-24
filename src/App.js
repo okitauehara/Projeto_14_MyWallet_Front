@@ -7,11 +7,16 @@ import Earnings from './components/pages/Earnings';
 import Expenses from './components/pages/Expenses';
 import { useState } from 'react/cjs/react.development';
 import UserContext from './contexts/UserContext';
+import { useEffect } from 'react';
 
 export default function App() {
 	
-	const userData = JSON.parse(localStorage.getItem('@user'));
+	const [userData, setUserData] = useState(null);
 	const [user, setUser] = useState(userData);
+
+	useEffect(() => {
+		setUserData(JSON.parse(localStorage.getItem('@user')))
+	}, []);
 
 	return (
 		<UserContext.Provider value={{ user, userData }}>

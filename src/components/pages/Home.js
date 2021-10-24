@@ -6,17 +6,27 @@ import { Link, useHistory } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import { getTransactions, requestSignOut } from "../../services/API";
+import Swal from "sweetalert2";
+import Loading from "../shared/Loading";
 
 export default function Home({ setUser }) {
 
     const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(false);
     const { user } = useContext(UserContext);
     const history = useHistory();
 
     useEffect(() => {
+        setLoading(true);
         getTransactions(user.token)
-            .then((response) => setItems(response.data))
-            .catch((error) => console.log(error));
+            .then((response) => {
+                setItems(response.data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
         // eslint-disable-next-line
     }, []);
 
@@ -30,14 +40,25 @@ export default function Home({ setUser }) {
         }
     }
 
-    function signOutUser() {
-        requestSignOut(user.token)
-            .then(() => {
-                localStorage.removeItem('@user');
-                setUser({})
-                history.push('/');
-            })
-            .catch((error) => console.log(error));
+    async function signOutUser() {
+        await Swal.fire({
+            title: 'Deseja deslogar de sua conta?',
+            text: 'Você terá que inserir seus dados novamente no próximo acesso',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim',
+            cancelButtonText: `Cancelar`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                requestSignOut(user.token)
+                    .then(() => {
+                    localStorage.removeItem('@user');
+                    setUser({})
+                    history.push('/');
+                })
+                    .catch((error) => console.log(error));
+            }
+        })
     }
 
     return (
@@ -46,7 +67,7 @@ export default function Home({ setUser }) {
             <Link to='/'>
                 <LogoutIcon onClick={signOutUser}></LogoutIcon>
             </Link>
-                <Transactions items={items} balance={balance}/>
+                {loading ? <ContainerList><Loading /></ContainerList> : <Transactions items={items} balance={balance}/>}
                 <Buttons>
                     <Link to='/new-earning'>
                         <AddButton>

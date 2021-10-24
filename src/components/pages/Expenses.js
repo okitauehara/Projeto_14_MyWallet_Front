@@ -8,6 +8,8 @@ import UserContext from "../../contexts/UserContext";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router";
 import Loader from "react-loader-spinner";
+import HomeButton from "../shared/HomeButton";
+import { Link } from "react-router-dom";
 
 export default function Expenses() {
 
@@ -41,16 +43,16 @@ export default function Expenses() {
             type: 'expense'
         }
         postNewExpense(body, user.token)
-            .then(() => {
+            .then(async () => {
                 setIsDisabled(false);
-                Swal.fire({
+                await Swal.fire({
                     icon: 'success',
                     title: 'Adicionado com sucesso!',
                 })
                 history.push('/home')
             })
-            .catch(() => {
-                Swal.fire({
+            .catch(async () => {
+                await Swal.fire({
                     icon: 'error',
                     title: 'Verifique se os dados inseridos estão corretos e tente novamente',
                 })
@@ -61,6 +63,9 @@ export default function Expenses() {
     return (
         <>
             <PageTitle>Nova Saída</PageTitle>
+            <Link to='/home'>
+                <HomeButton />
+            </Link>
             <Form onSubmit={submitExpenses}>
                 <Input
                     placeholder='Valor (Ex: 30,00)'
