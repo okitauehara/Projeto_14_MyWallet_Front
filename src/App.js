@@ -7,16 +7,17 @@ import Earnings from './components/pages/Earnings';
 import Expenses from './components/pages/Expenses';
 import { useState } from 'react/cjs/react.development';
 import UserContext from './contexts/UserContext';
-import { useEffect } from 'react';
+import { useHistory } from 'react-router';
 
 export default function App() {
 	
-	const [userData, setUserData] = useState(null);
+	const userData = JSON.parse(localStorage.getItem('@user'));
 	const [user, setUser] = useState(userData);
+	const history = useHistory();
 
-	useEffect(() => {
-		setUserData(JSON.parse(localStorage.getItem('@user')))
-	}, []);
+	if (userData === undefined) {
+		history.push('/')
+	}
 
 	return (
 		<UserContext.Provider value={{ user, userData }}>

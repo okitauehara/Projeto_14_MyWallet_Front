@@ -17,6 +17,7 @@ export default function Home({ setUser }) {
     const history = useHistory();
 
     useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('@user')));
         setLoading(true);
         getTransactions(user.token)
             .then((response) => {
