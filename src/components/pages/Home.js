@@ -172,7 +172,7 @@ const Balance = styled.p`
     color: #000000;
 
     & span {
-        font-weight: 400;
+        font-weight: 700;
         color: ${props => props.balance > 0 ? '#03ac00' : '#c70000'}
     }
 `;

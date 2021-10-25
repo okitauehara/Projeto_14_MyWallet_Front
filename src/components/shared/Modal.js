@@ -11,7 +11,7 @@ export default function Modal({ isHidden, setIsHidden, modalInfo, setItems }) {
     const [displayUpdate, setDisplayUpdate] = useState(true);
     const [displayBox, setDisplayBox] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
-    const [data, setData] = useState({ description: '', value: '' });
+    const [data, setData] = useState({ description: '', value: '', type: '' });
 
     const handleChange = event => {
         const { name, value } = event.target;
@@ -20,7 +20,6 @@ export default function Modal({ isHidden, setIsHidden, modalInfo, setItems }) {
             [name]: value
         }));
     };
-
 
     function deleteRecord() {
         deleteTransaction(modalInfo.id, user.token)
@@ -44,10 +43,18 @@ export default function Modal({ isHidden, setIsHidden, modalInfo, setItems }) {
     function updateRecord(event) {
         event.preventDefault();
         setIsDisabled(true);
+
+        let checkType = (data.type).toLowerCase();
+        if (checkType === 'entrada') {
+            checkType = 'earning';
+        } else {
+            checkType = 'expense';
+        }
+
         const body = {
             description: data.description,
             value: Number((data.value).replace(',', '')),
-            type: modalInfo.type
+            type: checkType
         }
         updateTransaction(modalInfo.id, user.token, body)
             .then(() => {
@@ -61,7 +68,7 @@ export default function Modal({ isHidden, setIsHidden, modalInfo, setItems }) {
                         setIsDisabled(false);
                         setDisplayBox(false);
                         setDisplayUpdate(true);
-                        setData({ description: '', value: '' });
+                        setData({ description: '', value: '', type: '' });
                         setIsHidden(true);
                     })
                     .catch((error) => {
@@ -76,11 +83,18 @@ export default function Modal({ isHidden, setIsHidden, modalInfo, setItems }) {
         <ModalContainer hidden={isHidden}>
             <ModalBox hidden={displayBox}>
                 <Description>{modalInfo.description}</Description>
+                <Date>{modalInfo.date}</Date>
                 <Value type={modalInfo.type}>R${(modalInfo.value / 100).toFixed(2).replace('.', ',')}</Value>
                 <Actions>
-                    <ModalButton style={{ backgroundColor: '#c70000'}} onClick={deleteRecord}>Apagar</ModalButton>
-                    <ModalButton style={{ backgroundColor: '#009eff'}} onClick={() => {setDisplayUpdate(false); setDisplayBox(true)}}>Atualizar</ModalButton>
-                    <ModalButton style={{ backgroundColor: '#c5c5c5'}} onClick={() => setIsHidden(true)}>Voltar</ModalButton>
+                    <ModalButton
+                        style={{ backgroundColor: '#c70000'}}
+                        onClick={deleteRecord}>Apagar</ModalButton>
+                    <ModalButton
+                        style={{ backgroundColor: '#009eff'}}
+                        onClick={() => {setDisplayUpdate(false); setDisplayBox(true)}}>Atualizar</ModalButton>
+                    <ModalButton
+                        style={{ backgroundColor: '#c5c5c5'}}
+                        onClick={() => setIsHidden(true)}>Voltar</ModalButton>
                 </Actions>
             </ModalBox>
             <UpdateBox hidden={displayUpdate} onSubmit={updateRecord}>
@@ -107,9 +121,22 @@ export default function Modal({ isHidden, setIsHidden, modalInfo, setItems }) {
                     disabled={isDisabled}
                     validation={true}
                     ></Input>
+                <Input
+                    placeholder='Entrada ou Saída?'
+                    type='text'
+                    name='type'
+                    required
+                    value={data.type}
+                    onChange={handleChange}
+                    pattern='^(Entrada|entrada|Saída|saída)$'
+                    disabled={isDisabled}
+                    validation={true}
+                    ></Input>
                 <Actions style={{ gridTemplateColumns: 'repeat(2, auto)', marginTop: '0px' }}>
                     <ModalButton style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#a328d6' }}>Salvar</ModalButton>
-                    <ModalButton style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#c5c5c5' }} onClick={() => {setDisplayUpdate(true); setDisplayBox(false)}}>Voltar</ModalButton>
+                    <ModalButton
+                        style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#c5c5c5' }}
+                        onClick={() => {setDisplayUpdate(true); setDisplayBox(false); setData({ description: '', value: '', type: '' })}}>Voltar</ModalButton>
                 </Actions>
             </UpdateBox>
         </ModalContainer>
@@ -123,11 +150,8 @@ const ModalContainer = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 10;
-    -webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
     justify-content: center;
     align-items: center;
     display: ${props => props.hidden ? 'none' : 'flex'};
@@ -150,6 +174,14 @@ const Description = styled.p`
     font-size: 20px;
     max-width: 90%;
     color: #000000;
+    line-height: 30px;
+    word-break: break-word;
+`;
+
+const Date = styled.p`
+    font-size: 20px;
+    max-width: 90%;
+    color: #c6c6c6;
     line-height: 30px;
     word-break: break-word;
 `;
