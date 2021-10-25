@@ -106,18 +106,20 @@ function Transactions({ items, setItems, balance }) {
                 setIsHidden={setIsHidden}
                 modalInfo={modalInfo} />
             <ContainerList quantity={items.length}>
-                <Info>Clique no registro para mais informações</Info>
-                <Items>
-                {items.length > 0 ? 
-                items.map(item => {
-                return (
-                <Item key={item.id} onClick={() => openModal(item)}>
-                    <DateAndDescription><span>{item.date}</span>{item.description}</DateAndDescription>
-                    <Value type={item.type}>{(item.value / 100).toFixed(2).replace('.', ',')}</Value>
-                </Item>
-                )}) :
-                <NoItems>Não há registros de entrada ou saída</NoItems>}
-                </Items>
+                <LayoutBox>
+                    <Info>Clique no registro para mais informações</Info>
+                    <Items>
+                    {items.length > 0 ? 
+                    items.map(item => {
+                    return (
+                    <Item key={item.id} onClick={() => openModal(item)}>
+                        <DateAndDescription><span>{item.date}</span>{item.description}</DateAndDescription>
+                        <Value type={item.type}>{(item.value / 100).toFixed(2).replace('.', ',')}</Value>
+                    </Item>
+                    )}) :
+                    <NoItems>Não há registros de entrada ou saída</NoItems>}
+                    </Items>
+                </LayoutBox>
                 {items.length > 0 ?
                 <Balance balance={balance}>SALDO <span>{(balance / 100).toFixed(2).replace('.', ',')}</span></Balance>
                 :
@@ -153,6 +155,12 @@ const ContainerList = styled.div`
     justify-content: ${props => props.quantity > 0 ? 'space-between' : 'center'};
 `;
 
+const LayoutBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+`;
+
 const Info = styled.p`
     font-size: 13px;
     color: #8c11be;
@@ -168,6 +176,7 @@ const Items = styled.div`
     max-height: 348px;
     border-radius: 5px;
     overflow-y: scroll;
+    margin-top: 10px;
 
     &::-webkit-scrollbar {
     width: 0px;
