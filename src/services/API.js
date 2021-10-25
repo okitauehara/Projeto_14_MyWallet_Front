@@ -50,6 +50,12 @@ function deleteTransaction(transactionId, token) {
     return promise;
 }
 
+function updateTransaction(transactionId, token, body) {
+    const config = createHeaders(token);
+    const promise = axios.put(`${URL_BASE}/transactions/${transactionId}`, body, config);
+    return promise;
+}
+
 export {
     postSignUp,
     postSignIn,
@@ -57,5 +63,6 @@ export {
     getTransactions,
     postNewEarning,
     postNewExpense,
-    deleteTransaction
+    deleteTransaction,
+    updateTransaction
 }
