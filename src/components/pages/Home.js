@@ -100,8 +100,13 @@ function Transactions({ items, setItems, balance }) {
 
     return (
         <>
-            <Modal setItems={setItems} isHidden={isHidden} setIsHidden={setIsHidden} modalInfo={modalInfo} />
+            <Modal
+                setItems={setItems}
+                isHidden={isHidden}
+                setIsHidden={setIsHidden}
+                modalInfo={modalInfo} />
             <ContainerList quantity={items.length}>
+                <Info>Clique no registro para mais informações</Info>
                 <Items>
                 {items.length > 0 ? 
                 items.map(item => {
@@ -148,8 +153,19 @@ const ContainerList = styled.div`
     justify-content: ${props => props.quantity > 0 ? 'space-between' : 'center'};
 `;
 
+const Info = styled.p`
+    font-size: 13px;
+    color: #8c11be;
+    word-break: break-word;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #8c11be;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+`;
+
 const Items = styled.div`
-    max-height: 377px;
+    max-height: 348px;
     border-radius: 5px;
     overflow-y: scroll;
 
@@ -170,6 +186,7 @@ const Balance = styled.p`
     display: flex;
     justify-content: space-between;
     color: #000000;
+    padding-top: 10px;
 
     & span {
         font-weight: 700;
