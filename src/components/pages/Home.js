@@ -107,7 +107,7 @@ function Transactions({ items, setItems, balance }) {
                 modalInfo={modalInfo} />
             <ContainerList quantity={items.length}>
                 <LayoutBox>
-                    <Info>Clique no registro para mais informações</Info>
+                    {items.length > 0 ? <Info>Clique no registro para mais informações</Info> : ''}
                     <Items>
                     {items.length > 0 ? 
                     items.map(item => {
