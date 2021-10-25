@@ -8,6 +8,7 @@ import UserContext from "../../contexts/UserContext";
 import { getTransactions, requestSignOut } from "../../services/API";
 import Swal from "sweetalert2";
 import Loading from "../shared/Loading";
+import Modal from "../shared/Modal";
 
 export default function Home({ setUser }) {
 
@@ -68,7 +69,7 @@ export default function Home({ setUser }) {
             <Link to='/'>
                 <LogoutIcon onClick={signOutUser}></LogoutIcon>
             </Link>
-                {loading ? <ContainerList><Loading /></ContainerList> : <Transactions items={items} balance={balance}/>}
+                {loading ? <ContainerList><Loading /></ContainerList> : <Transactions items={items} setItems={setItems} balance={balance}/>}
                 <Buttons>
                     <Link to='/new-earning'>
                         <AddButton>
@@ -87,25 +88,37 @@ export default function Home({ setUser }) {
     );
 }
 
-function Transactions({ items, balance }) {
+function Transactions({ items, setItems, balance }) {
+
+    const [isHidden, setIsHidden] = useState(true);
+    const [modalInfo, setModalInfo] = useState({});
+
+    function openModal(item) {
+        setIsHidden(false);
+        setModalInfo(item);
+    }
+
     return (
-        <ContainerList quantity={items.length}>
-            <Items>
-            {items.length > 0 ? 
-            items.map(item => {
-            return (
-            <Item key={item.id}>
-                <DateAndDescription><span>{item.date}</span>{item.description}</DateAndDescription>
-                <Value type={item.type}>{(item.value / 100).toFixed(2).replace('.', ',')}</Value>
-            </Item>
-            )}) :
-            <NoItems>Não há registros de entrada ou saída</NoItems>}
-            </Items>
-            {items.length > 0 ?
-            <Balance balance={balance}>SALDO <span>{(balance / 100).toFixed(2).replace('.', ',')}</span></Balance>
-            :
-            ''}
-        </ContainerList>
+        <>
+            <Modal setItems={setItems} isHidden={isHidden} setIsHidden={setIsHidden} modalInfo={modalInfo} />
+            <ContainerList quantity={items.length}>
+                <Items>
+                {items.length > 0 ? 
+                items.map(item => {
+                return (
+                <Item key={item.id} onClick={() => openModal(item)}>
+                    <DateAndDescription><span>{item.date}</span>{item.description}</DateAndDescription>
+                    <Value type={item.type}>{(item.value / 100).toFixed(2).replace('.', ',')}</Value>
+                </Item>
+                )}) :
+                <NoItems>Não há registros de entrada ou saída</NoItems>}
+                </Items>
+                {items.length > 0 ?
+                <Balance balance={balance}>SALDO <span>{(balance / 100).toFixed(2).replace('.', ',')}</span></Balance>
+                :
+                ''}
+            </ContainerList>
+        </>
     );
 }
 

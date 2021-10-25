@@ -44,11 +44,18 @@ function postNewExpense(body, token) {
     return promise;
 }
 
+function deleteTransaction(transactionId, token) {
+    const config = createHeaders(token);
+    const promise = axios.delete(`${URL_BASE}/transactions/${transactionId}`, config);
+    return promise;
+}
+
 export {
     postSignUp,
     postSignIn,
     requestSignOut,
     getTransactions,
     postNewEarning,
-    postNewExpense
+    postNewExpense,
+    deleteTransaction
 }
