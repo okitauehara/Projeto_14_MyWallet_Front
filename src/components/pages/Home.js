@@ -18,17 +18,6 @@ export default function Home({ setUser }) {
     const history = useHistory();
 
     useEffect(() => {
-        if (!user) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Você precisa estar logado para acessar esta página!',
-            })
-            history.push('/')
-        }
-        // eslint-disable-next-line
-    }, []);
-
-    useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('@user')));
         setLoading(true);
         getTransactions(user.token)
@@ -41,6 +30,17 @@ export default function Home({ setUser }) {
                 setLoading(false);
             });
     }, [user.token, setUser]);
+
+    useEffect(() => {
+        if (!user) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Você precisa estar logado para acessar esta página!',
+            })
+            history.push('/')
+        }
+        // eslint-disable-next-line
+    }, []);
 
     let balance = 0;
 
