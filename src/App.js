@@ -5,7 +5,7 @@ import SignUp from './components/pages/SignUp';
 import Home from './components/pages/Home';
 import Earnings from './components/pages/Earnings';
 import Expenses from './components/pages/Expenses';
-import { useEffect, useState } from 'react/cjs/react.development';
+import { useEffect, useState } from 'react';
 import UserContext from './contexts/UserContext';
 import { useHistory } from 'react-router';
 
