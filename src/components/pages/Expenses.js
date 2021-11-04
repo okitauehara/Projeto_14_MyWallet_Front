@@ -13,12 +13,12 @@ import { Link } from "react-router-dom";
 
 export default function Expenses() {
 
-    const { user, userData } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [data, setData] = useState({ value: '', description: '' });
     const [isDisabled, setIsDisabled] = useState(false);
     const history = useHistory()
 
-    if (!userData) {
+    if (!user) {
         Swal.fire({
             icon: 'error',
             title: 'Você precisa estar logado para acessar esta página!',

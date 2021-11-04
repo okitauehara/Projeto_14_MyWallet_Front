@@ -11,16 +11,15 @@ import { useHistory } from 'react-router';
 
 export default function App() {
 	
-	const userData = JSON.parse(localStorage.getItem('@user'));
-	const [user, setUser] = useState(userData);
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem('@user')));
 	const history = useHistory();
 
-	if (userData === undefined) {
+	if (user === undefined) {
 		history.push('/')
 	}
 
 	return (
-		<UserContext.Provider value={{ user, userData }}>
+		<UserContext.Provider value={{ user }}>
 			<BrowserRouter>
 				<Switch>
 					<Route path='/' exact>
