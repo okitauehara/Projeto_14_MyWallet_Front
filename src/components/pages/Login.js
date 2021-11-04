@@ -82,7 +82,7 @@ export default function Login({ setUser }) {
                 />
                 <Button disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#ffffff" height={60} width={60} /> : 'Entrar'}</Button>
             </Form>
-            <Link to='/sign-up' disabled={isDisabled} style={{pointerEvents: isDisabled ? 'none' : 'all'}}>
+            <Link to='/sign-up' disabled={isDisabled} style={{ pointerEvents: isDisabled ? 'none' : 'all',  textDecoration: 'none' }}>
                 <Redirect>Primeira vez? Cadastre-se!</Redirect>
             </Link>
         </CenterPage>

@@ -112,7 +112,7 @@ export default function SignUp() {
                 />
                 <Button disabled={isDisabled}>Cadastrar</Button>
             </Form>
-            <Link to='/' disabled={isDisabled} style={{pointerEvents: isDisabled ? 'none' : 'all'}}>
+            <Link to='/' disabled={isDisabled} style={{ pointerEvents: isDisabled ? 'none' : 'all', textDecoration: 'none' }}>
                 <Redirect>Já tem uma conta? Entre agora!</Redirect>
             </Link>
         </CenterPage>

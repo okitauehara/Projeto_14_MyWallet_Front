@@ -63,7 +63,7 @@ export default function Earnings() {
     return (
         <>
             <PageTitle>Nova Entrada</PageTitle>
-            <Link to='/home'>
+            <Link to='/home' style={{ textDecoration: 'none' }}>
                 <HomeButton />
             </Link>
             <Form onSubmit={submitEarnings}>

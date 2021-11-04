@@ -63,7 +63,7 @@ export default function Expenses() {
     return (
         <>
             <PageTitle>Nova Saída</PageTitle>
-            <Link to='/home'>
+            <Link to='/home' style={{ textDecoration: 'none' }}>
                 <HomeButton />
             </Link>
             <Form onSubmit={submitExpenses}>

@@ -65,18 +65,18 @@ export default function Home({ setUser }) {
     return (
         <HomeContent>
             <PageTitle>Olá, {user.name}</PageTitle>
-            <Link to='/'>
+            <Link to='/' style={{ textDecoration: 'none' }}>
                 <LogoutIcon onClick={signOutUser}></LogoutIcon>
             </Link>
                 {loading ? <ContainerList><Loading /></ContainerList> : <Transactions items={items} setItems={setItems} balance={balance}/>}
                 <Buttons>
-                    <Link to='/new-earning'>
+                    <Link to='/new-earning' style={{ textDecoration: 'none' }}>
                         <AddButton>
                             <PlusIcon></PlusIcon>
                             Nova Entrada
                         </AddButton>
                     </Link>
-                    <Link to='/new-expense'>
+                    <Link to='/new-expense' style={{ textDecoration: 'none' }}>
                         <AddButton>
                             <MinusIcon></MinusIcon>
                             Nova Saída
