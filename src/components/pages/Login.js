@@ -3,7 +3,7 @@ import Button from "../shared/Button";
 import Redirect from "../shared/Redirect";
 import Form from "../shared/Form";
 import { CenterPage, Logo } from "../shared/LoginSignUp";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { postSignIn } from "../../services/API";
 import Loader from "react-loader-spinner";
@@ -18,9 +18,12 @@ export default function Login({ setUser }) {
 
     const history = useHistory();
 
-    if (user?.token) {
-        history.push('/home');
-    }
+    useEffect(() => {
+        if (!!user) {
+            history.push('/home');
+        }
+        // eslint-disable-next-line
+    }, []);
 
     const handleChange = event => {
         const { name, value } = event.target;

@@ -18,7 +18,7 @@ export default function Earnings() {
     const [isDisabled, setIsDisabled] = useState(false);
     const history = useHistory();
 
-    if (userData === null) {
+    if (!userData) {
         Swal.fire({
             icon: 'error',
             title: 'Você precisa estar logado para acessar esta página!',
