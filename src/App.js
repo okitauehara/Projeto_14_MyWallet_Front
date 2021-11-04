@@ -5,18 +5,22 @@ import SignUp from './components/pages/SignUp';
 import Home from './components/pages/Home';
 import Earnings from './components/pages/Earnings';
 import Expenses from './components/pages/Expenses';
-import { useState } from 'react/cjs/react.development';
+import { useEffect, useState } from 'react/cjs/react.development';
 import UserContext from './contexts/UserContext';
 import { useHistory } from 'react-router';
 
 export default function App() {
 	
-	const [user, setUser] = useState(JSON.parse(localStorage.getItem('@user')));
+	const [user, setUser] = useState('');
 	const history = useHistory();
 
-	if (user === undefined) {
-		history.push('/')
-	}
+	useEffect(() => {
+		setUser(JSON.parse(localStorage.getItem('@user')));
+		if (user === undefined) {
+			history.push('/')
+		}
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<UserContext.Provider value={{ user }}>
