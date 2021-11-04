@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import styled from "styled-components";
 import UserContext from "../../contexts/UserContext";
 import { deleteTransaction, getTransactions, updateTransaction } from "../../services/API";
