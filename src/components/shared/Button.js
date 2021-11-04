@@ -14,6 +14,11 @@ const Button = styled.button`
     justify-content: center;
     align-items: center;
     pointer-events: ${props => props.disabled ? 'none' : 'all'};
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.1);
+    }
 `;
 
 export default Button;

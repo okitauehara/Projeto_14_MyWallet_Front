@@ -93,7 +93,7 @@ export default function Modal({ isHidden, setIsHidden, modalInfo, setItems }) {
                         style={{ backgroundColor: '#009eff'}}
                         onClick={() => {setDisplayUpdate(false); setDisplayBox(true)}}>Atualizar</ModalButton>
                     <ModalButton
-                        style={{ backgroundColor: '#c5c5c5'}}
+                        style={{ backgroundColor: '#a9a9a9'}}
                         onClick={() => setIsHidden(true)}>Voltar</ModalButton>
                 </Actions>
             </ModalBox>
@@ -135,7 +135,7 @@ export default function Modal({ isHidden, setIsHidden, modalInfo, setItems }) {
                 <Actions style={{ gridTemplateColumns: 'repeat(2, auto)', marginTop: '0px' }}>
                     <ModalButton style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#a328d6' }}>Salvar</ModalButton>
                     <ModalButton
-                        style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#c5c5c5' }}
+                        style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#a9a9a9' }}
                         onClick={() => {setDisplayUpdate(true); setDisplayBox(false); setData({ description: '', value: '', type: '' })}}>Voltar</ModalButton>
                 </Actions>
             </UpdateBox>
@@ -215,6 +215,11 @@ const ModalButton = styled.button`
     justify-content: center;
     align-items: center;
     pointer-events: ${props => props.disabled ? 'none' : 'all'};
+    
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.1);
+    }
 `;
 
 const UpdateBox = styled.form`
@@ -227,6 +232,11 @@ const UpdateBox = styled.form`
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.1);
+    }
 `;
 
 const Input = styled.input`

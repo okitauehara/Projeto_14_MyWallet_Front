@@ -135,6 +135,11 @@ const LogoutIcon = styled(RiLogoutBoxRLine)`
     position: absolute;
     top: 25px;
     right: 25px;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(0.9);
+    }
 `;
 
 const HomeContent = styled.div`
@@ -224,6 +229,11 @@ const AddButton = styled.button`
     border-radius: 5px;
     position: relative;
     padding: 10px;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.1);
+    }
 `;
 
 const PlusIcon = styled(FiPlusCircle)`
@@ -245,6 +255,12 @@ const MinusIcon = styled(FiMinusCircle)`
 const Item = styled.div`
     display: flex;
     justify-content: space-between;
+
+    &:hover {
+        font-weight: 700;
+        cursor: pointer;
+        filter: brightness(1.1);
+    }
 `;
 
 const DateAndDescription = styled.p`

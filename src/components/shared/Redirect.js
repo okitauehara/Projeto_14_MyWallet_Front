@@ -5,6 +5,11 @@ const Redirect = styled.p`
     font-weight: 700;
     color: #ffffff;
     margin-top: 36px;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(0.9);
+    }
 `;
 
 export default Redirect;

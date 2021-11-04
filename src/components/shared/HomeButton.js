@@ -8,6 +8,11 @@ const HomeButton = styled(AiFillHome)`
     position: absolute;
     top: 25px;
     right: 25px;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(0.9);
+    }
 `;
 
 export default HomeButton;
