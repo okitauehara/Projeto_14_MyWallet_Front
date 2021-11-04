@@ -31,17 +31,6 @@ export default function Home({ setUser }) {
             });
     }, [user.token, setUser]);
 
-    useEffect(() => {
-        if (!user) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Você precisa estar logado para acessar esta página!',
-            })
-            history.push('/')
-        }
-        // eslint-disable-next-line
-    }, []);
-
     let balance = 0;
 
     for (let i = 0; i < items.length; i++) {
