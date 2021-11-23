@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { useHistory, Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import Input from '../styles/Input';
-import Button from '../components/Button';
+import Button from '../styles/Button';
 import Form from '../styles/Form';
 import PageTitle from '../styles/PageTitle';
 import { postNewEarning } from '../services/API';
