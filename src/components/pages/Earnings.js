@@ -25,11 +25,7 @@ export default function Earnings() {
   }
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setData({ ...data, [event.target.name]: [event.target.value] });
   };
 
   function submitEarnings(event) {
