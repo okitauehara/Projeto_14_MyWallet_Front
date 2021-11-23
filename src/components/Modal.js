@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
-import UserContext from '../../contexts/UserContext';
-import { deleteTransaction, getTransactions, updateTransaction } from '../../services/API';
+import UserContext from '../contexts/UserContext';
+import { deleteTransaction, getTransactions, updateTransaction } from '../services/API';
 
 export default function Modal({
   isHidden, setIsHidden, modalInfo, setItems,

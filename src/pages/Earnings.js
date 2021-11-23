@@ -2,13 +2,13 @@ import { useContext, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useHistory, Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
-import Input from '../shared/Input';
-import Button from '../shared/Button';
-import Form from '../shared/Form';
-import PageTitle from '../shared/PageTitle';
-import { postNewEarning } from '../../services/API';
-import UserContext from '../../contexts/UserContext';
-import HomeButton from '../shared/HomeButton';
+import Input from '../styles/Input';
+import Button from '../styles/Button';
+import Form from '../styles/Form';
+import PageTitle from '../styles/PageTitle';
+import { postNewEarning } from '../services/API';
+import UserContext from '../contexts/UserContext';
+import HomeButton from '../styles/HomeButton';
 
 export default function Earnings() {
   const { user } = useContext(UserContext);

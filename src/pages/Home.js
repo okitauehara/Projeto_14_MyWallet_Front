@@ -5,11 +5,11 @@ import { FiPlusCircle, FiMinusCircle } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import UserContext from '../../contexts/UserContext';
-import { getTransactions, requestSignOut } from '../../services/API';
-import PageTitle from '../shared/PageTitle';
-import Loading from '../shared/Loading';
-import Modal from '../shared/Modal';
+import UserContext from '../contexts/UserContext';
+import { getTransactions, requestSignOut } from '../services/API';
+import PageTitle from '../styles/PageTitle';
+import Loading from '../components/Loading';
+import Modal from '../components/Modal';
 
 export default function Home({ setUser }) {
   const [items, setItems] = useState([]);

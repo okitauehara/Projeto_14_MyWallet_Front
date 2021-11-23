@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import Swal from 'sweetalert2';
-import Input from '../shared/Input';
-import Button from '../shared/Button';
-import Redirect from '../shared/Redirect';
-import Form from '../shared/Form';
-import { CenterPage, Logo } from '../shared/LoginSignUp';
-import { postSignIn } from '../../services/API';
-import UserContext from '../../contexts/UserContext';
+import Input from '../styles/Input';
+import Button from '../styles/Button';
+import Redirect from '../styles/Redirect';
+import Form from '../styles/Form';
+import { CenterPage, Logo } from '../styles/LoginSignUp';
+import { postSignIn } from '../services/API';
+import UserContext from '../contexts/UserContext';
 
 export default function Login({ setUser }) {
   const [data, setData] = useState({ email: '', password: '' });

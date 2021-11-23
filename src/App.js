@@ -4,11 +4,11 @@ import {
   BrowserRouter, Switch, Route, useHistory,
 } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Login from './components/pages/Login';
-import SignUp from './components/pages/SignUp';
-import Home from './components/pages/Home';
-import Earnings from './components/pages/Earnings';
-import Expenses from './components/pages/Expenses';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Home from './pages/Home';
+import Earnings from './pages/Earnings';
+import Expenses from './pages/Expenses';
 import UserContext from './contexts/UserContext';
 
 export default function App() {

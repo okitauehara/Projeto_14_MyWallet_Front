@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Input from '../shared/Input';
-import Button from '../shared/Button';
-import Redirect from '../shared/Redirect';
-import Form from '../shared/Form';
-import { CenterPage, Logo } from '../shared/LoginSignUp';
-import { postSignUp } from '../../services/API';
+import Input from '../styles/Input';
+import Button from '../styles/Button';
+import Redirect from '../styles/Redirect';
+import Form from '../styles/Form';
+import { CenterPage, Logo } from '../styles/LoginSignUp';
+import { postSignUp } from '../services/API';
 
 export default function SignUp() {
   const [data, setData] = useState({
