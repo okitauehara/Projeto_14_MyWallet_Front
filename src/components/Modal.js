@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import UserContext from '../contexts/UserContext';
@@ -12,6 +13,7 @@ export default function Modal({
   const [displayBox, setDisplayBox] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [data, setData] = useState({ description: '', value: '', type: '' });
+  const history = useHistory();
 
   const handleChange = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
@@ -29,11 +31,35 @@ export default function Modal({
             setItems(response.data);
             setIsHidden(true);
           })
-          .catch((error) => {
-            console.log(error);
+          .catch(async (err) => {
+            if (err.response?.status === 401) {
+              await Swal.fire({
+                icon: 'error',
+                title: 'Usuário não encontrado, você será redirecionado para tela de login.',
+              });
+              history.push('/');
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+              });
+            }
           });
       })
-      .catch((error) => console.log(error));
+      .catch(async (err) => {
+        if (err.response?.status === 401) {
+          await Swal.fire({
+            icon: 'error',
+            title: 'Usuário não encontrado, você será redirecionado para tela de login.',
+          });
+          history.push('/');
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+          });
+        }
+      });
   }
 
   function updateRecord(event) {
@@ -67,12 +93,40 @@ export default function Modal({
             setData({ description: '', value: '', type: '' });
             setIsHidden(true);
           })
-          .catch((error) => {
-            console.log(error);
-            setIsDisabled(false);
+          .catch(async (err) => {
+            if (err.response?.status === 401) {
+              await Swal.fire({
+                icon: 'error',
+                title: 'Usuário não encontrado, você será redirecionado para tela de login.',
+              });
+              history.push('/');
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+              });
+            }
           });
       })
-      .catch((error) => console.log(error));
+      .catch(async (err) => {
+        if (err.response?.status === 401) {
+          await Swal.fire({
+            icon: 'error',
+            title: 'Usuário não encontrado, você será redirecionado para tela de login.',
+          });
+          history.push('/');
+        } else if (err.response?.status === 400) {
+          await Swal.fire({
+            icon: 'error',
+            title: 'Verifique se os dados inseridos são válidos.',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+          });
+        }
+      });
   }
 
   return (
@@ -228,7 +282,7 @@ const ModalButton = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.75);
 	pointer-events: ${(props) => (props.disabled ? 'none' : 'all')};
 	
 	&:hover {
