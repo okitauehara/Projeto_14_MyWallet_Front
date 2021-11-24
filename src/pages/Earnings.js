@@ -72,6 +72,7 @@ export default function Earnings() {
           onChange={handleChange}
           pattern="^[1-9]\d{0,2}(\d{3})*,\d{2}$"
           disabled={isDisabled}
+          autoComplete="off"
         />
         <Input
           placeholder="Descrição"
@@ -81,6 +82,7 @@ export default function Earnings() {
           value={data.description}
           onChange={handleChange}
           disabled={isDisabled}
+          autoComplete="off"
         />
         <Button disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#ffffff" height={60} width={60} /> : 'Salvar entrada'}</Button>
       </Form>

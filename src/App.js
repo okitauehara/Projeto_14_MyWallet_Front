@@ -10,7 +10,8 @@ import Expenses from './pages/Expenses';
 import UserContext from './contexts/UserContext';
 
 export default function App() {
-  const [user, setUser] = useState('');
+  const userData = JSON.parse(localStorage.getItem('@user'));
+  const [user, setUser] = useState(userData);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

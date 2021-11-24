@@ -64,6 +64,7 @@ export default function SignUp() {
           onChange={handleChange}
           disabled={isDisabled}
           validation
+          autoComplete="off"
         />
         <Input
           placeholder="E-mail"
@@ -75,6 +76,7 @@ export default function SignUp() {
           onChange={handleChange}
           disabled={isDisabled}
           validation
+          autoComplete="off"
         />
         <Input
           placeholder="Senha"

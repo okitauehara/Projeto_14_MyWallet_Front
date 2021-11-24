@@ -16,6 +16,7 @@ const Input = styled.input`
     font-family: 'Raleway', sans-serif;
     font-size: 20px;
     color: #000000;
+    opacity: 0.5;
   }
 
   &:valid {
