@@ -10,10 +10,10 @@ import { CenterPage, Logo } from '../styles/LoginSignUp';
 import { postSignIn } from '../services/API';
 import UserContext from '../contexts/UserContext';
 
-export default function Login({ setUser }) {
+export default function Login() {
   const [data, setData] = useState({ email: '', password: '' });
   const [isDisabled, setIsDisabled] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const history = useHistory();
 
@@ -21,11 +21,10 @@ export default function Login({ setUser }) {
     if (user) {
       history.push('/home');
     }
-    // eslint-disable-next-line
-    }, []);
+  }, [user]);
 
   const handleChange = (event) => {
-    setData({ ...data, [event.target.name]: [event.target.value] });
+    setData({ ...data, [event.target.name]: event.target.value });
   };
 
   function submitLogin(event) {

@@ -17,20 +17,15 @@ export default function SignUp() {
   const emailRegex = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
 
   const handleChange = (event) => {
-    setData({ ...data, [event.target.name]: [event.target.value] });
+    setData({ ...data, [event.target.name]: event.target.value });
   };
+
+  console.log(data);
 
   function submitSignUp(event) {
     event.preventDefault();
     setIsDisabled(true);
-    const body = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      confirmation: data.confirmation,
-    };
-
-    postSignUp(body)
+    postSignUp(data)
       .then(() => {
         Swal.fire({
           icon: 'success',

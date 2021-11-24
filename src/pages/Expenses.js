@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useHistory, Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
@@ -16,16 +16,18 @@ export default function Expenses() {
   const [isDisabled, setIsDisabled] = useState(false);
   const history = useHistory();
 
-  if (!user) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Você precisa estar logado para acessar esta página!',
-    });
-    history.push('/');
-  }
+  useEffect(async () => {
+    if (!user) {
+      await Swal.fire({
+        icon: 'warning',
+        title: 'Você precisa estar logado para acessar esta página!',
+      });
+      history.push('/');
+    }
+  }, [user]);
 
   const handleChange = (event) => {
-    setData({ ...data, [event.target.name]: [event.target.value] });
+    setData({ ...data, [event.target.name]: event.target.value });
   };
 
   function submitExpenses(event) {

@@ -14,11 +14,7 @@ export default function Modal({
   const [data, setData] = useState({ description: '', value: '', type: '' });
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setData({ ...data, [event.target.name]: event.target.value });
   };
 
   function deleteRecord() {

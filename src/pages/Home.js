@@ -11,25 +11,42 @@ import PageTitle from '../styles/PageTitle';
 import Loading from '../components/Loading';
 import Modal from '../components/Modal';
 
-export default function Home({ setUser }) {
+export default function Home() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const history = useHistory();
 
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('@user')));
+  useEffect(async () => {
+    if (!user) {
+      await Swal.fire({
+        icon: 'warning',
+        title: 'Você precisa estar logado para acessar esta página!',
+      });
+      history.push('/');
+    }
     setLoading(true);
     getTransactions(user.token)
       .then((response) => {
         setItems(response.data);
         setLoading(false);
       })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
+      .catch((err) => {
+        if (err.response?.status === 401) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Usuário não encontrado.',
+          });
+          setLoading(false);
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Tivemos um problema no servidor, tente novamente mais tarde',
+          });
+          setLoading(false);
+        }
       });
-  }, [user.token, setUser]);
+  }, []);
 
   let balance = 0;
 
@@ -54,10 +71,24 @@ export default function Home({ setUser }) {
         requestSignOut(user.token)
           .then(() => {
             localStorage.removeItem('@user');
-            setUser({});
+            setUser('');
             history.push('/');
           })
-          .catch((error) => console.log(error));
+          .catch((err) => {
+            if (err.response?.status === 401) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Usuário não encontrado.',
+              });
+              setLoading(false);
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Tivemos um problema no servidor, tente novamente mais tarde',
+              });
+              setLoading(false);
+            }
+          });
       }
     });
   }
