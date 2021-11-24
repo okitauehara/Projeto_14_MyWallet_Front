@@ -49,7 +49,7 @@ export default function Earnings() {
       .catch(async () => {
         await Swal.fire({
           icon: 'error',
-          title: 'Verifique se os dados inseridos estão corretos e tente novamente',
+          title: 'Verifique se os dados inseridos estão corretos e tente novamente.',
         });
         setIsDisabled(false);
       });

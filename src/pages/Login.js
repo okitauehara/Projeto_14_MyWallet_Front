@@ -45,7 +45,7 @@ export default function Login() {
       .catch(() => {
         Swal.fire({
           icon: 'error',
-          title: 'E-mail ou senha incorretos',
+          title: 'E-mail ou senha incorretos.',
         });
         setIsDisabled(false);
       });

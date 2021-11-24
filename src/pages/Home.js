@@ -41,7 +41,7 @@ export default function Home() {
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Tivemos um problema no servidor, tente novamente mais tarde',
+            title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
           });
           setLoading(false);
         }

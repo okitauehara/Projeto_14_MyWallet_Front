@@ -36,13 +36,17 @@ export default function SignUp() {
         if (error.response.status === 400) {
           Swal.fire({
             icon: 'error',
-            title: 'Verifique se todos os dados inseridos são válidos',
+            title: 'Verifique se todos os dados inseridos são válidos.',
           });
-        }
-        if (error.response.status === 409) {
+        } else if (error.response.status === 409) {
           Swal.fire({
             icon: 'error',
-            title: 'O e-mail inserido já está em uso',
+            title: 'O e-mail inserido já está em uso.',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
           });
         }
         setIsDisabled(false);
