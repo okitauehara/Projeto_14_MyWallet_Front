@@ -12,13 +12,13 @@ const Input = styled.input`
   margin-bottom: 13px;
   pointer-events: ${(props) => (props.disabled ? 'none' : 'all')};
 
-  & ::placeholder {
+  &::placeholder {
     font-family: 'Raleway', sans-serif;
     font-size: 20px;
     color: #000000;
   }
 
-  & :valid {
+  &:valid {
     background-color: ${(props) => (props.validation ? '#d4f8d4' : 'default')};
   }
 `;

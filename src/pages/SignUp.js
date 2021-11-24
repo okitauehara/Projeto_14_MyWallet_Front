@@ -20,8 +20,6 @@ export default function SignUp() {
     setData({ ...data, [event.target.name]: event.target.value });
   };
 
-  console.log(data);
-
   function submitSignUp(event) {
     event.preventDefault();
     setIsDisabled(true);

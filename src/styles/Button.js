@@ -15,7 +15,7 @@ const Button = styled.button`
   align-items: center;
   pointer-events: ${(props) => (props.disabled ? 'none' : 'all')};
 
-  & :hover {
+  &:hover {
     cursor: pointer;
     filter: brightness(1.1);
   }

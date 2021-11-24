@@ -9,7 +9,7 @@ const HomeButton = styled(AiFillHome)`
   top: 25px;
   right: 25px;
 
-  & :hover {
+  &:hover {
     cursor: pointer;
     filter: brightness(0.9);
   }
