@@ -10,10 +10,12 @@ import { getTransactions, requestSignOut } from '../services/API';
 import PageTitle from '../styles/PageTitle';
 import Loading from '../components/Loading';
 import Modal from '../components/Modal';
+import { calcBalance, formatCurrency } from '../services/utils';
 
 export default function Home() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [balance, setBalance] = useState(0);
   const { user, setUser } = useContext(UserContext);
   const history = useHistory();
 
@@ -26,10 +28,11 @@ export default function Home() {
       history.push('/');
     }
     setLoading(true);
-    getTransactions(user.token)
+    await getTransactions(user.token)
       .then((response) => {
         setItems(response.data);
         setLoading(false);
+        setBalance(calcBalance(response.data));
       })
       .catch((err) => {
         if (err.response?.status === 401) {
@@ -47,16 +50,6 @@ export default function Home() {
         }
       });
   }, []);
-
-  let balance = 0;
-
-  for (let i = 0; i < items.length; i += 1) {
-    if (items[i].type === 'earning') {
-      balance += items[i].value;
-    } else {
-      balance -= items[i].value;
-    }
-  }
 
   async function signOutUser() {
     await Swal.fire({
@@ -150,7 +143,7 @@ function Transactions({ items, setItems, balance }) {
                     <span>{item.date}</span>
                     {item.description}
                   </DateAndDescription>
-                  <Value type={item.type}>{(item.value / 100).toFixed(2).replace('.', ',')}</Value>
+                  <Value type={item.type}>{formatCurrency(item.value)}</Value>
                 </Item>
               ))
               : <NoItems>Não há registros de entrada ou saída</NoItems>}
@@ -161,7 +154,7 @@ function Transactions({ items, setItems, balance }) {
             <Balance balance={balance}>
               SALDO
               {' '}
-              <span>{(balance / 100).toFixed(2).replace('.', ',')}</span>
+              <span>{formatCurrency(balance)}</span>
             </Balance>
           )
           : ''}
