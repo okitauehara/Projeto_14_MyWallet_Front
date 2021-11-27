@@ -75,7 +75,7 @@ export default function Login() {
           onChange={handleChange}
           disabled={isDisabled}
         />
-        <Button disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#ffffff" height={60} width={60} /> : 'Entrar'}</Button>
+        <Button disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#DEAE60" height={60} width={60} /> : 'Entrar'}</Button>
       </Form>
       <Link to="/sign-up" disabled={isDisabled} style={{ pointerEvents: isDisabled ? 'none' : 'all', textDecoration: 'none' }}>
         <Redirect>Primeira vez? Cadastre-se!</Redirect>

@@ -86,7 +86,7 @@ export default function Earnings() {
           disabled={isDisabled}
           autoComplete="off"
         />
-        <Button disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#ffffff" height={60} width={60} /> : 'Salvar entrada'}</Button>
+        <Button disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#DEAE60" height={60} width={60} /> : 'Salvar entrada'}</Button>
       </Form>
     </>
   );

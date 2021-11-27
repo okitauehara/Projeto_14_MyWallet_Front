@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 import Swal from 'sweetalert2';
 import Input from '../styles/Input';
 import Button from '../styles/Button';
@@ -105,7 +106,7 @@ export default function SignUp() {
           disabled={isDisabled}
           validation
         />
-        <Button disabled={isDisabled}>Cadastrar</Button>
+        <Button disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#DEAE60" height={60} width={60} /> : 'Cadastrar'}</Button>
       </Form>
       <Link to="/" disabled={isDisabled} style={{ pointerEvents: isDisabled ? 'none' : 'all', textDecoration: 'none' }}>
         <Redirect>Já tem uma conta? Entre agora!</Redirect>
