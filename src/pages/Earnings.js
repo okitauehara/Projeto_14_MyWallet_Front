@@ -43,6 +43,7 @@ export default function Earnings() {
         await Swal.fire({
           icon: 'success',
           title: 'Adicionado com sucesso!',
+          confirmButtonColor: '#191970',
         });
         history.push('/home');
       })
@@ -50,6 +51,7 @@ export default function Earnings() {
         await Swal.fire({
           icon: 'error',
           title: 'Verifique se os dados inseridos estão corretos e tente novamente.',
+          confirmButtonColor: '#191970',
         });
         setIsDisabled(false);
       });

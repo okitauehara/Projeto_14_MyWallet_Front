@@ -22,6 +22,7 @@ export default function Home() {
       await Swal.fire({
         icon: 'warning',
         title: 'Você precisa estar logado para acessar esta página!',
+        confirmButtonColor: '#191970',
       });
       history.push('/');
     } else {
@@ -37,12 +38,14 @@ export default function Home() {
             Swal.fire({
               icon: 'error',
               title: 'Usuário não encontrado.',
+              confirmButtonColor: '#191970',
             });
             setLoading(false);
           } else {
             Swal.fire({
               icon: 'error',
               title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+              confirmButtonColor: '#191970',
             });
             setLoading(false);
           }
@@ -58,6 +61,7 @@ export default function Home() {
       showCancelButton: true,
       confirmButtonText: 'Sim',
       cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#191970',
     }).then((result) => {
       if (result.isConfirmed) {
         requestSignOut(user?.token)
@@ -71,12 +75,14 @@ export default function Home() {
               Swal.fire({
                 icon: 'error',
                 title: 'Usuário não encontrado.',
+                confirmButtonColor: '#191970',
               });
               setLoading(false);
             } else {
               Swal.fire({
                 icon: 'error',
                 title: 'Tivemos um problema no servidor, tente novamente mais tarde',
+                confirmButtonColor: '#191970',
               });
               setLoading(false);
             }

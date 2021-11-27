@@ -46,6 +46,7 @@ export default function Login() {
         Swal.fire({
           icon: 'error',
           title: 'E-mail ou senha incorretos.',
+          confirmButtonColor: '#191970',
         });
         setIsDisabled(false);
       });

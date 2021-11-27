@@ -26,6 +26,7 @@ export default function SignUp() {
         await Swal.fire({
           icon: 'success',
           title: 'Usuário cadastrado!',
+          confirmButtonColor: '#191970',
         });
         setIsDisabled(false);
         history.push('/');
@@ -35,16 +36,19 @@ export default function SignUp() {
           Swal.fire({
             icon: 'error',
             title: 'Verifique se todos os dados inseridos são válidos.',
+            confirmButtonColor: '#191970',
           });
         } else if (error.response.status === 409) {
           Swal.fire({
             icon: 'error',
             title: 'O e-mail inserido já está em uso.',
+            confirmButtonColor: '#191970',
           });
         } else {
           Swal.fire({
             icon: 'error',
             title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+            confirmButtonColor: '#191970',
           });
         }
         setIsDisabled(false);

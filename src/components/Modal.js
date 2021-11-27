@@ -28,6 +28,7 @@ export default function Modal({
             await Swal.fire({
               icon: 'success',
               title: 'Deletado com sucesso!',
+              confirmButtonColor: '#191970',
             });
             setItems(response.data);
             setIsHidden(true);
@@ -37,12 +38,14 @@ export default function Modal({
               await Swal.fire({
                 icon: 'error',
                 title: 'Usuário não encontrado, você será redirecionado para tela de login.',
+                confirmButtonColor: '#191970',
               });
               history.push('/');
             } else {
               Swal.fire({
                 icon: 'error',
                 title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+                confirmButtonColor: '#191970',
               });
             }
           });
@@ -52,12 +55,14 @@ export default function Modal({
           await Swal.fire({
             icon: 'error',
             title: 'Usuário não encontrado, você será redirecionado para tela de login.',
+            confirmButtonColor: '#191970',
           });
           history.push('/');
         } else {
           Swal.fire({
             icon: 'error',
             title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+            confirmButtonColor: '#191970',
           });
         }
       });
@@ -78,6 +83,7 @@ export default function Modal({
             await Swal.fire({
               icon: 'success',
               title: 'Atualizado com sucesso!',
+              confirmButtonColor: '#191970',
             });
             setItems(response.data);
             setIsDisabled(false);
@@ -91,6 +97,7 @@ export default function Modal({
               await Swal.fire({
                 icon: 'error',
                 title: 'Usuário não encontrado, você será redirecionado para tela de login.',
+                confirmButtonColor: '#191970',
               });
               history.push('/');
               setIsDisabled(false);
@@ -98,6 +105,7 @@ export default function Modal({
               Swal.fire({
                 icon: 'error',
                 title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+                confirmButtonColor: '#191970',
               });
               setIsDisabled(false);
             }
@@ -108,6 +116,7 @@ export default function Modal({
           await Swal.fire({
             icon: 'error',
             title: 'Usuário não encontrado, você será redirecionado para tela de login.',
+            confirmButtonColor: '#191970',
           });
           history.push('/');
           setIsDisabled(false);
@@ -115,12 +124,14 @@ export default function Modal({
           Swal.fire({
             icon: 'error',
             title: 'Verifique se os dados inseridos são válidos.',
+            confirmButtonColor: '#191970',
           });
           setIsDisabled(false);
         } else {
           Swal.fire({
             icon: 'error',
             title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+            confirmButtonColor: '#191970',
           });
           setIsDisabled(false);
         }

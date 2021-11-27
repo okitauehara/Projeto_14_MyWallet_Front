@@ -21,6 +21,7 @@ export default function Expenses() {
       await Swal.fire({
         icon: 'warning',
         title: 'Você precisa estar logado para acessar esta página!',
+        confirmButtonColor: '#191970',
       });
       history.push('/');
     }
@@ -44,6 +45,7 @@ export default function Expenses() {
         await Swal.fire({
           icon: 'success',
           title: 'Adicionado com sucesso!',
+          confirmButtonColor: '#191970',
         });
         history.push('/home');
       })
@@ -51,6 +53,7 @@ export default function Expenses() {
         await Swal.fire({
           icon: 'error',
           title: 'Verifique se os dados inseridos estão corretos e tente novamente.',
+          confirmButtonColor: '#191970',
         });
         setIsDisabled(false);
       });
