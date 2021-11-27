@@ -4,10 +4,11 @@ import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserContext from '../contexts/UserContext';
 import { deleteTransaction, getTransactions, updateTransaction } from '../services/API';
+import { calcBalance } from '../services/utils';
 import * as S from '../styles/ModalComponent';
 
 export default function Modal({
-  isHidden, setIsHidden, modalInfo, setItems,
+  isHidden, setIsHidden, modalInfo, setItems, setBalance,
 }) {
   const { user } = useContext(UserContext);
   const [displayUpdate, setDisplayUpdate] = useState(true);
@@ -32,6 +33,7 @@ export default function Modal({
             });
             setItems(response.data);
             setIsHidden(true);
+            setBalance(calcBalance(response.data));
           })
           .catch(async (err) => {
             if (err.response?.status === 401) {
@@ -91,6 +93,7 @@ export default function Modal({
             setDisplayUpdate(true);
             setData({ description: '', value: '', type: '' });
             setIsHidden(true);
+            setBalance(calcBalance(response.data));
           })
           .catch(async (err) => {
             if (err.response?.status === 401) {

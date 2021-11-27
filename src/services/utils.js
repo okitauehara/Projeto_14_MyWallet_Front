@@ -1,12 +1,5 @@
 const calcBalance = (transactions) => {
-  let balance = 0;
-  transactions.forEach((transaction) => {
-    if (transaction.type === 'earning') {
-      balance += transaction.value;
-    } else {
-      balance -= transaction.value;
-    }
-  });
+  const balance = transactions.reduce((total, event) => (event.type === 'earning' ? total + event.value : total - event.value), 0);
   return balance;
 };
 

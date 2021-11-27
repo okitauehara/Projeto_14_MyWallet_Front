@@ -51,7 +51,7 @@ export default function Home() {
           }
         });
     }
-  }, []);
+  }, [items.length]);
 
   async function signOutUser() {
     await Swal.fire({
@@ -101,7 +101,7 @@ export default function Home() {
       <Link to="/" style={{ textDecoration: 'none' }}>
         <S.LogoutIcon onClick={signOutUser} />
       </Link>
-      {loading ? <S.ContainerList><Loading /></S.ContainerList> : <Transactions items={items} setItems={setItems} balance={balance} />}
+      {loading ? <S.ContainerList><Loading /></S.ContainerList> : <Transactions items={items} setItems={setItems} balance={balance} setBalance={setBalance} />}
       <S.Buttons>
         <Link to="/new-earning" style={{ textDecoration: 'none' }}>
           <S.AddButton>
@@ -120,7 +120,9 @@ export default function Home() {
   );
 }
 
-function Transactions({ items, setItems, balance }) {
+function Transactions({
+  items, setItems, balance, setBalance,
+}) {
   const [isHidden, setIsHidden] = useState(true);
   const [modalInfo, setModalInfo] = useState({});
 
@@ -136,6 +138,7 @@ function Transactions({ items, setItems, balance }) {
         isHidden={isHidden}
         setIsHidden={setIsHidden}
         modalInfo={modalInfo}
+        setBalance={setBalance}
       />
       <S.ContainerList quantity={items.length}>
         <S.LayoutBox>
