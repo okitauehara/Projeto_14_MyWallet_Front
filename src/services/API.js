@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const URL_BASE = 'https://my-wallet-database.herokuapp.com';
+const URL_BASE = 'http://localhost:4000';
+// https://my-wallet-database.herokuapp.com
 
 function createHeaders(token) {
   const config = {

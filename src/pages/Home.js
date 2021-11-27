@@ -24,29 +24,30 @@ export default function Home() {
         title: 'Você precisa estar logado para acessar esta página!',
       });
       history.push('/');
+    } else {
+      setLoading(true);
+      await getTransactions(user?.token)
+        .then((response) => {
+          setItems(response.data);
+          setLoading(false);
+          setBalance(calcBalance(response.data));
+        })
+        .catch((err) => {
+          if (err.response?.status === 401) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Usuário não encontrado.',
+            });
+            setLoading(false);
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
+            });
+            setLoading(false);
+          }
+        });
     }
-    setLoading(true);
-    await getTransactions(user.token)
-      .then((response) => {
-        setItems(response.data);
-        setLoading(false);
-        setBalance(calcBalance(response.data));
-      })
-      .catch((err) => {
-        if (err.response?.status === 401) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Usuário não encontrado.',
-          });
-          setLoading(false);
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
-          });
-          setLoading(false);
-        }
-      });
   }, []);
 
   async function signOutUser() {
@@ -59,7 +60,7 @@ export default function Home() {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        requestSignOut(user.token)
+        requestSignOut(user?.token)
           .then(() => {
             localStorage.removeItem('@user');
             setUser('');
@@ -89,7 +90,7 @@ export default function Home() {
       <PageTitle>
         Olá,
         {' '}
-        {user.name}
+        {user?.name}
       </PageTitle>
       <Link to="/" style={{ textDecoration: 'none' }}>
         <S.LogoutIcon onClick={signOutUser} />

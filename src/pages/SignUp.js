@@ -9,9 +9,7 @@ import { CenterPage, Logo } from '../styles/LoginSignUp';
 import { postSignUp } from '../services/API';
 
 export default function SignUp() {
-  const [data, setData] = useState({
-    name: '', email: '', password: '', confirmation: '',
-  });
+  const [data, setData] = useState({ name: '', email: '', password: '' });
   const [isDisabled, setIsDisabled] = useState(false);
   const history = useHistory();
   const emailRegex = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
@@ -24,8 +22,8 @@ export default function SignUp() {
     event.preventDefault();
     setIsDisabled(true);
     postSignUp(data)
-      .then(() => {
-        Swal.fire({
+      .then(async () => {
+        await Swal.fire({
           icon: 'success',
           title: 'Usuário cadastrado!',
         });
@@ -100,8 +98,6 @@ export default function SignUp() {
           required
           minLength="8"
           pattern={data.password}
-          value={data.confirmation}
-          onChange={handleChange}
           disabled={isDisabled}
           validation
         />

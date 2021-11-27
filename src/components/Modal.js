@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import UserContext from '../contexts/UserContext';
 import { deleteTransaction, getTransactions, updateTransaction } from '../services/API';
+import * as S from '../styles/ModalComponent';
 
 export default function Modal({
   isHidden, setIsHidden, modalInfo, setItems,
@@ -65,18 +66,10 @@ export default function Modal({
   function updateRecord(event) {
     event.preventDefault();
     setIsDisabled(true);
-
-    let checkType = (data.type).toLowerCase();
-    if (checkType === 'entrada') {
-      checkType = 'earning';
-    } else {
-      checkType = 'expense';
-    }
-
     const body = {
       description: data.description,
       value: Number((data.value).replace(',', '')),
-      type: checkType,
+      type: data.type,
     };
     updateTransaction(modalInfo.id, user.token, body)
       .then(() => {
@@ -100,11 +93,13 @@ export default function Modal({
                 title: 'Usuário não encontrado, você será redirecionado para tela de login.',
               });
               history.push('/');
+              setIsDisabled(false);
             } else {
               Swal.fire({
                 icon: 'error',
                 title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
               });
+              setIsDisabled(false);
             }
           });
       })
@@ -115,55 +110,55 @@ export default function Modal({
             title: 'Usuário não encontrado, você será redirecionado para tela de login.',
           });
           history.push('/');
+          setIsDisabled(false);
         } else if (err.response?.status === 400) {
-          await Swal.fire({
+          Swal.fire({
             icon: 'error',
             title: 'Verifique se os dados inseridos são válidos.',
           });
+          setIsDisabled(false);
         } else {
           Swal.fire({
             icon: 'error',
             title: 'Tivemos um problema no servidor, tente novamente mais tarde.',
           });
+          setIsDisabled(false);
         }
       });
   }
 
   return (
-    <ModalContainer hidden={isHidden}>
-      <ModalBox hidden={displayBox}>
-        <Description>{modalInfo.description}</Description>
-        <Date>{modalInfo.date}</Date>
-        <Value type={modalInfo.type}>
+    <S.ModalContainer hidden={isHidden}>
+      <S.ModalBox hidden={displayBox}>
+        <S.Description>{modalInfo.description}</S.Description>
+        <S.Date>{modalInfo.date}</S.Date>
+        <S.Value type={modalInfo.type}>
           R$
           {(modalInfo.value / 100).toFixed(2).replace('.', ',')}
-        </Value>
-        <Actions>
-          <ModalButton
+        </S.Value>
+        <S.Actions>
+          <S.ModalButton
             style={{ backgroundColor: '#c70000' }}
             onClick={deleteRecord}
           >
             Apagar
-
-          </ModalButton>
-          <ModalButton
+          </S.ModalButton>
+          <S.ModalButton
             style={{ backgroundColor: '#009eff' }}
             onClick={() => { setDisplayUpdate(false); setDisplayBox(true); }}
           >
             Atualizar
-
-          </ModalButton>
-          <ModalButton
+          </S.ModalButton>
+          <S.ModalButton
             style={{ backgroundColor: '#a9a9a9' }}
             onClick={() => setIsHidden(true)}
           >
             Voltar
-
-          </ModalButton>
-        </Actions>
-      </ModalBox>
-      <UpdateBox hidden={displayUpdate} onSubmit={updateRecord}>
-        <Input
+          </S.ModalButton>
+        </S.Actions>
+      </S.ModalBox>
+      <S.UpdateBox hidden={displayUpdate} onSubmit={updateRecord}>
+        <S.Input
           placeholder="Descrição"
           required
           type="text"
@@ -175,7 +170,7 @@ export default function Modal({
           disabled={isDisabled}
           validation
         />
-        <Input
+        <S.Input
           placeholder="Valor (Ex: 30,00)"
           type="text"
           name="value"
@@ -186,146 +181,44 @@ export default function Modal({
           disabled={isDisabled}
           validation
         />
-        <Input
-          placeholder="Entrada ou Saída?"
-          type="text"
-          name="type"
-          required
-          value={data.type}
-          onChange={handleChange}
-          pattern="^(Entrada|entrada|Saída|saída)$"
-          disabled={isDisabled}
-          validation
-        />
-        <Actions style={{ gridTemplateColumns: 'repeat(2, auto)', marginTop: '0px' }}>
-          <ModalButton style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#a328d6' }}>Salvar</ModalButton>
-          <ModalButton
+        <S.TypeOptions>
+          <S.Option>
+            <S.RadioInput
+              type="radio"
+              name="type"
+              id="earning"
+              required
+              value="earning"
+              onChange={handleChange}
+              disabled={isDisabled}
+              validation
+            />
+            <S.Label htmlFor="earning">Entrada</S.Label>
+          </S.Option>
+          <S.Option>
+            <S.RadioInput
+              type="radio"
+              name="type"
+              id="expense"
+              required
+              value="expense"
+              onChange={handleChange}
+              disabled={isDisabled}
+              validation
+            />
+            <S.Label htmlFor="expense">Saída</S.Label>
+          </S.Option>
+        </S.TypeOptions>
+        <S.Actions style={{ gridTemplateColumns: 'repeat(2, auto)', marginTop: '0px' }}>
+          <S.ModalButton style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#a328d6' }}>Salvar</S.ModalButton>
+          <S.ModalButton
             style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#a9a9a9' }}
-            onClick={() => { setDisplayUpdate(true); setDisplayBox(false); setData({ description: '', value: '', type: '' }); }}
+            onClick={() => { setDisplayUpdate(true); setDisplayBox(false); setData({ ...data, description: '', value: '' }); }}
           >
             Voltar
-
-          </ModalButton>
-        </Actions>
-      </UpdateBox>
-    </ModalContainer>
+          </S.ModalButton>
+        </S.Actions>
+      </S.UpdateBox>
+    </S.ModalContainer>
   );
 }
-
-const ModalContainer = styled.div`
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgba(0, 0, 0, 0.8);
-	z-index: 10;
-	justify-content: center;
-	align-items: center;
-	display: ${(props) => (props.hidden ? 'none' : 'flex')};
-	pointer-events: ${(props) => (props.hidden ? 'none' : 'all')};
-`;
-
-const ModalBox = styled.div`
-	width: calc(100vw - 50px);
-	height: auto;
-	background-color: #ffffff;
-	border-radius: 5px;
-	position: relative;
-	display: ${(props) => (props.hidden ? 'none' : 'flex')};
-	flex-direction: column;
-	justify-content: space-between;
-	padding: 10px;
-`;
-
-const Description = styled.p`
-	font-size: 20px;
-	max-width: 90%;
-	color: #000000;
-	line-height: 30px;
-	word-break: break-word;
-`;
-
-const Date = styled.p`
-	font-size: 20px;
-	max-width: 90%;
-	color: #c6c6c6;
-	line-height: 30px;
-	word-break: break-word;
-`;
-
-const Value = styled.p`
-	font-size: 20px;
-	max-width: 90%;
-	line-height: 30px;
-	word-break: break-word;
-	color: ${(props) => (props.type === 'earning' ? '#03ac00' : '#c70000')};
-`;
-
-const Actions = styled.div`
-	display: grid;
-	grid-template-columns: repeat(3, auto);
-	grid-template-rows: 1;
-	gap: 15px;
-	margin-top: 10px;
-`;
-
-const ModalButton = styled.button`
-	font-family: 'Raleway', sans-serif;
-	font-size: 18px;
-	font-weight: 700;
-	color: #ffffff;
-	width: calc(33.3vw - 33.3px);
-	height: 46px;
-	border: none;
-	border-radius: 5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.75);
-	pointer-events: ${(props) => (props.disabled ? 'none' : 'all')};
-	
-	&:hover {
-		cursor: pointer;
-		filter: brightness(1.1);
-	}
-`;
-
-const UpdateBox = styled.form`
-	width: calc(100vw - 50px);
-	height: auto;
-	background-color: #ffffff;
-	border-radius: 5px;
-	position: relative;
-	display: ${(props) => (props.hidden ? 'none' : 'flex')};
-	flex-direction: column;
-	justify-content: space-between;
-	padding: 10px;
-
-	&:hover {
-			cursor: pointer;
-			filter: brightness(1.1);
-	}
-`;
-
-const Input = styled.input`
-	font-family: 'Raleway', sans-serif;
-	font-size: 20px;
-	width: auto;
-	height: 40px;
-	background-color: #ffffff;
-	border-radius: 5px;
-	border: 1px solid #c5c5c5;
-	outline: none;
-	margin-bottom: 13px;
-
-	& ::placeholder {
-		font-family: 'Raleway', sans-serif;
-		font-size: 20px;
-		color: #000000;
-	}
-
-	& :valid {
-		background-color: ${(props) => (props.validation ? '#d4f8d4' : 'default')};
-	}
-`;
