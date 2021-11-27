@@ -11,7 +11,7 @@ const CenterPage = styled.section`
 const Logo = styled.h1`
   font-family: 'Saira Stencil One', cursive;
   font-size: 32px;
-  color: #ffffff;
+  color: #DEAE60;
   margin-bottom: 25px;
 `;
 

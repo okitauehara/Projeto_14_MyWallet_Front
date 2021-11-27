@@ -17,7 +17,7 @@ const ModalContainer = styled.div`
 const ModalBox = styled.div`
 	width: calc(100vw - 50px);
 	height: auto;
-	background-color: #ffffff;
+	background-color: #fffff0;
 	border-radius: 5px;
 	position: relative;
 	display: ${(props) => (props.hidden ? 'none' : 'flex')};
@@ -47,7 +47,7 @@ const Value = styled.p`
 	max-width: 90%;
 	line-height: 30px;
 	word-break: break-word;
-	color: ${(props) => (props.type === 'earning' ? '#03ac00' : '#c70000')};
+	color: ${(props) => (props.type === 'earning' ? '#7ba05b' : '#9f0000')};
 `;
 
 const Actions = styled.div`
@@ -82,7 +82,7 @@ const ModalButton = styled.button`
 const UpdateBox = styled.form`
 	width: calc(100vw - 50px);
 	height: auto;
-	background-color: #ffffff;
+	background-color: #fffff0;
 	border-radius: 5px;
 	position: relative;
 	display: ${(props) => (props.hidden ? 'none' : 'flex')};
@@ -96,7 +96,7 @@ const Input = styled.input`
 	font-size: 20px;
 	width: auto;
 	height: 40px;
-	background-color: #ffffff;
+	background-color: #fffff0;
 	border-radius: 5px;
 	border: 1px solid #c5c5c5;
 	outline: none;
@@ -109,7 +109,7 @@ const Input = styled.input`
 	}
 
 	& :valid {
-		background-color: ${(props) => (props.validation ? '#d4f8d4' : 'default')};
+		background-color: ${(props) => (props.validation ? '#d4f8d4' : '#fffff0')};
 	}
 `;
 

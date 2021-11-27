@@ -11,6 +11,7 @@ const Input = styled.input`
   padding-left: 15px;
   margin-bottom: 13px;
   pointer-events: ${(props) => (props.disabled ? 'none' : 'all')};
+  background-color: #fffff0;
 
   &::placeholder {
     font-family: 'Raleway', sans-serif;
@@ -20,7 +21,7 @@ const Input = styled.input`
   }
 
   &:valid {
-    background-color: ${(props) => (props.validation ? '#d4f8d4' : 'default')};
+    background-color: ${(props) => (props.validation ? '#d4f8d4' : '#fffff0')};
   }
 `;
 

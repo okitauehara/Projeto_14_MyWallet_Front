@@ -138,13 +138,13 @@ export default function Modal({
         </S.Value>
         <S.Actions>
           <S.ModalButton
-            style={{ backgroundColor: '#c70000' }}
+            style={{ backgroundColor: '#9f0000' }}
             onClick={deleteRecord}
           >
             Apagar
           </S.ModalButton>
           <S.ModalButton
-            style={{ backgroundColor: '#009eff' }}
+            style={{ backgroundColor: '#191970' }}
             onClick={() => { setDisplayUpdate(false); setDisplayBox(true); }}
           >
             Atualizar
@@ -210,7 +210,7 @@ export default function Modal({
           </S.Option>
         </S.TypeOptions>
         <S.Actions style={{ gridTemplateColumns: 'repeat(2, auto)', marginTop: '0px' }}>
-          <S.ModalButton style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#a328d6' }}>Salvar</S.ModalButton>
+          <S.ModalButton style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#191970' }}>Salvar</S.ModalButton>
           <S.ModalButton
             style={{ width: 'calc(50vw - 42.5px)', backgroundColor: '#a9a9a9' }}
             onClick={() => { setDisplayUpdate(true); setDisplayBox(false); setData({ ...data, description: '', value: '' }); }}

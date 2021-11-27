@@ -57,11 +57,11 @@ table {
 body {
 	font-family: 'Raleway', sans-serif;
 	font-weight: 400;
-	background-color: #8c11be;
+	background-color: #0D1732;
 	margin: 25px;
 }
 button {
-  box-shadow: 5px 5px 10px 0px rgba(100, 0, 150, 0.75);
+  box-shadow: 2px 2px 10px 0px rgba(222, 174, 96, 0.75);
 }
 button:active {
   filter: brightness(1.1);

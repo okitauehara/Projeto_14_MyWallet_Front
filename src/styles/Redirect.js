@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Redirect = styled.p`
 	font-size: 15px;
 	font-weight: 700;
-	color: #ffffff;
+	color: #DEAE60;
 	margin-top: 36px;
 
 	&:hover {

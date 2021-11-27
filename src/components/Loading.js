@@ -4,7 +4,7 @@ import Loader from 'react-loader-spinner';
 export default function Loading() {
   return (
     <LoadingComponent>
-      <Loader type="BallTriangle" color="#8c11be" height={40} width={40} />
+      <Loader type="BallTriangle" color="#0D1732" height={40} width={40} />
       <Status>Carregando registros...</Status>
     </LoadingComponent>
   );
@@ -20,6 +20,6 @@ const LoadingComponent = styled.div`
 
 const Status = styled.span`
   font-size: 16px;
-  color: #8c11be;
+  color: #0D1732;
   margin-top: 10px;
 `;

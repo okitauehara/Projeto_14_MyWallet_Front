@@ -5,7 +5,7 @@ import { FiPlusCircle, FiMinusCircle } from 'react-icons/fi';
 const LogoutIcon = styled(RiLogoutBoxRLine)`
   width: 25px;
   height: 25px;
-  color: #ffffff;
+  color: #DEAE60;
   position: absolute;
   top: 25px;
   right: 25px;
@@ -24,7 +24,7 @@ const HomeContent = styled.div`
 
 const ContainerList = styled.div`
   height: 100%;
-  background-color: #ffffff;
+  background-color: #fffff0;
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 15px;
@@ -41,10 +41,10 @@ const LayoutBox = styled.div`
 
 const Info = styled.p`
   font-size: 13px;
-  color: #8c11be;
+  color: #0D1732;
   word-break: break-word;
   padding-bottom: 10px;
-  border-bottom: 1px solid #8c11be;
+  border-bottom: 1px solid #0D1732;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -77,7 +77,7 @@ const Balance = styled.p`
 
   & span {
     font-weight: 700;
-    color: ${(props) => (props.balance > 0 ? '#03ac00' : '#c70000')}
+    color: ${(props) => (props.balance > 0 ? '#7ba05b' : '#9f0000')}
   }
 `;
 
@@ -92,13 +92,13 @@ const AddButton = styled.button`
   font-family: 'Raleway', sans-serif;
   font-size: 17px;
   font-weight: 700;
-  color: #ffffff;
+  color: #DEAE60;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
   width: calc(50vw - 32.5px);
   height: 114px;
-  background-color: #a328d6;
+  background-color: #323750;
   border: none;
   border-radius: 5px;
   position: relative;
@@ -156,7 +156,7 @@ const Value = styled.p`
   max-width: 25%;
   line-height: 30px;
   word-break: break-word;
-  color: ${(props) => (props.type === 'earning' ? '#03ac00' : '#c70000')};
+  color: ${(props) => (props.type === 'earning' ? '#7ba05b' : '#9f0000')};
 `;
 
 export {
