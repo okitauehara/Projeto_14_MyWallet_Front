@@ -65,6 +65,7 @@ export default function Login() {
           value={data.email}
           onChange={handleChange}
           disabled={isDisabled}
+          autoComplete="off"
         />
         <Input
           placeholder="Senha"

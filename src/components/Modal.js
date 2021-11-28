@@ -183,6 +183,7 @@ export default function Modal({
           onChange={handleChange}
           disabled={isDisabled}
           validation
+          autoComplete="off"
         />
         <S.Input
           placeholder="Valor (Ex: 30,00)"
@@ -194,6 +195,7 @@ export default function Modal({
           pattern="^[1-9]\d{0,2}(\d{3})*,\d{2}$"
           disabled={isDisabled}
           validation
+          autoComplete="off"
         />
         <S.TypeOptions>
           <S.Option>
