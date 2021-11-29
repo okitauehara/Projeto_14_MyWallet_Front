@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL_BASE = 'https://my-wallet-database.herokuapp.com';
+const URL_BASE = process.env.REACT_APP_BASE_URL;
 
 function createHeaders(token) {
   const config = {
